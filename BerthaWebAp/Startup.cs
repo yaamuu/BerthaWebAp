@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BerthaWebAp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BerthaWebAp
 {
@@ -32,6 +34,10 @@ namespace BerthaWebAp
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var connection = ConnectionString.connString;
+                
+            services.AddDbContext<DemoDbContext>(options => options.UseSqlServer(connection));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
