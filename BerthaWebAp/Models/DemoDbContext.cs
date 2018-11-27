@@ -17,6 +17,7 @@ namespace BerthaWebAp.Models
 
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<LocationMeasurments> LocationMeasurments { get; set; }
+        public virtual DbSet<PiResults> PiResults { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersMeasurments> UsersMeasurments { get; set; }
 
@@ -24,7 +25,7 @@ namespace BerthaWebAp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(ConnectionString.connString);
             }
         }
@@ -68,6 +69,17 @@ namespace BerthaWebAp.Models
                     .HasForeignKey(d => d.LocationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LocationMeasurment");
+            });
+
+            modelBuilder.Entity<PiResults>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.Location)
+                    .IsRequired()
+                    .HasMaxLength(15);
             });
 
             modelBuilder.Entity<Users>(entity =>
