@@ -8,9 +8,9 @@ namespace BerthaWebAp.Models
         public int Id { get; set; }
         public int LocationId { get; set; }
         public string AirCondition { get; set; }
-        public double Co2 { get; set; }
-        public double No2 { get; set; }
-        public double So2 { get; set; }
+        public string temperature { get; set; }
+        public string pressure { get; set; }
+        public string humidity { get; set; }
         public DateTime Date { get; set; }
 
         public Location Location { get; set; }
